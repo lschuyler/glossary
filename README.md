@@ -3,7 +3,7 @@
 * Contributors: lschuyler, automattic
 * Tags: glossary
 * Version: 0.3.0
-* Tested up to: 5.9.1
+* Tested up to: 5.9
 * Requires at least: 5.8
 * Requres PHP: 7.1
 * License: GPLv2 or later

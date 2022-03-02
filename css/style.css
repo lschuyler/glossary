@@ -1,0 +1,16 @@
+.glossary .glossary__item {
+    overflow: auto;
+}
+
+.glossary .glossary__item {
+    margin-bottom: 1em;
+}
+
+.glossary .glossary__item .link-more {
+    visibility: hidden;
+    display: none;
+}
+
+.glossary .glossary__title {
+    font-weight: bold;
+}

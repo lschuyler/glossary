@@ -1,15 +1,24 @@
 <?php
 /**
- * Plugin Name:       VIP Glossary
- * Plugin URI:        https://example.com/plugins/the-basics/
- * Description:       Adds a glossary custom post type with shortcode.
- * Version:           0.2
- * Requires at least: 5.2
- * Requires PHP:      7.1
- * Author:            lschuyler
- * License:           GPL v2 or later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       wpvip-glossary
+ * WPVIP Glossary
+ *
+ * @package     WPVIPGlossary
+ * @author      Lisa Schuyler <lisa@automattic.com>
+ * @copyright   2022 Lisa Schuyler
+ * @license     GPL-2.0-or-later
+ *
+ * @wordpress-plugin
+ * Plugin Name:     WPVIP Glossary
+ * Plugin URI:
+ * Description:     Adds a glossary custom post type with shortcode.
+ * Version:         0.2.0
+ * Author:          Lisa Schuyler
+ * Author URI:      https://lschuyler.dev
+ * Text Domain:     wpvip-glossary
+ * License:         GPL v2 or later
+ * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
+ * Requires PHP:    7.1
+ * Requires WP:     5.2
  */
 
 /**

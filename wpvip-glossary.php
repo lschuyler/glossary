@@ -22,8 +22,12 @@
  */
 
 /**
- * Class WPVIP_Glossary.
+ * WPVIP_Glossary class.
  *
+ * @since 0.1.0
+ *
+ * @package WPVIPGlossary
+ * @author  Lisa Schuyler *
  */
 class WPVIP_Glossary {
 

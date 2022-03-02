@@ -11,7 +11,7 @@
  * Plugin Name:     WPVIP Glossary
  * Plugin URI:
  * Description:     Adds a glossary custom post type with shortcode.
- * Version:         0.2.0
+ * Version:         0.3.0
  * Author:          Lisa Schuyler
  * Author URI:      https://lschuyler.dev
  * Text Domain:     wpvip-glossary

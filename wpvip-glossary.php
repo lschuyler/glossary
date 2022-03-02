@@ -31,8 +31,19 @@
  */
 class WPVIP_Glossary {
 
+	/**
+	 * CSS_VERSION constant, to be updated any time the CSS is updated to break the cache on the CSS.
+	 *
+	 * @since 0.1.0
+	 * @var string $CSS_VERSION Stores a constant to allow cache breaking of the CSS files.
+	 */
 	private const CSS_VERSION = '20211222';
 
+	/**
+	 * Instantiate the WPVIP_Glossary class.
+	 *
+	 * @since 0.1.0
+	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'create_glossary_post_type' ) );
 		add_shortcode( 'glossary', array( $this, 'create_glossary_shortcode' ) );
@@ -42,6 +53,7 @@ class WPVIP_Glossary {
 	/**
 	 * Register and enqueue a custom stylesheet for this plugin.
 	 *
+	 * @since 0.1.0
 	 */
 	public function enqueue_css() {
 		wp_enqueue_style( 'custom_glossary_css', plugin_dir_url( __FILE__ ) . 'css/style.css', array(), self::CSS_VERSION );
@@ -50,6 +62,9 @@ class WPVIP_Glossary {
 	/**
 	 * Create and register a new custom post type called 'glossary'.
 	 *
+	 * @since 0.1.0
+	 * @var array $labels Stores the custom post type labels for internationalization.
+	 * @var array $args Stores the arguments for the custom post type.
 	 */
 	public function create_glossary_post_type() {
 
@@ -97,8 +112,12 @@ class WPVIP_Glossary {
 	 *
 	 * Displays the glossary custom post type posts.
 	 *
-	 * @param array $atts Shortcode attributes. Default empty.
+	 * @param array $user_atts Shortcode attributes. Default empty.
 	 *
+	 * @var array $default_atts Stores the default shortcode parameters, available to be overridden by specification in shortcode.
+	 * @var array $atts User defined attributes from the shortcode tag.
+	 * @var array $args Arguments for the WordPress query.
+	 * @var string $query WordPress Query.
 	 */
 
 	public function create_glossary_shortcode( $user_atts = [] ) {

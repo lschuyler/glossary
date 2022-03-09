@@ -114,17 +114,25 @@ class WPVIP_Glossary {
 	 *
 	 * Displays the glossary custom post type posts.
 	 *
-	 * @param array $atts Shortcode attributes. Default empty.
+	 * @param mixed $atts Shortcode attributes. Default empty.
 	 * @param string|null $content Shortcode content. Default null.
 	 * @param string $tag Shortcode tag (name). Default empty.
 	 *
 	 * @return string Shortcode output.
 	 *
+	 * @var string $letter Used for optional Alphabet letter headings.
+	 * @var array $glossary_atts User specified attributes merged with default values for shortcode.
+	 * @var array $args Arguments for WP_QUERY.
 	 */
 
-	public function create_glossary_shortcode( array $atts = [], string $content = null, string $tag = '' ): string {
+	public function create_glossary_shortcode( $atts, string $content = null, string $tag = '' ): string {
 
 		$letter = '';
+
+		// if no attributes specified in shortcode by user, an empty string is passed for the $atts value. Switch it to an array.
+		if ( $atts == '' ) {
+			$atts = [];
+		}
 
 		// change attribute keys to lowercase
 		$atts = array_change_key_case( $atts, CASE_LOWER );
@@ -156,7 +164,7 @@ class WPVIP_Glossary {
 		if ( $query->have_posts() ) {
 
 			if ( $glossary_atts['alphabet_headings'] === "yes" ) {
-				$letter = '';
+				$letter = null;
 			}
 
 			$content .= "<div class='glossary'>";
@@ -174,7 +182,6 @@ class WPVIP_Glossary {
 				}
 
 				echo "<div class='glossary__item'>";
-
 
 				if ( $glossary_atts['link'] === 'yes' ) {
 					$content .= '<dt><a href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></dt>';

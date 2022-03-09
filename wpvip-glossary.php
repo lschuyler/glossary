@@ -21,6 +21,8 @@
  * Requires WP:     5.2
  */
 
+declare( strict_types=1 );
+
 /**
  * WPVIP_Glossary class.
  *
@@ -127,11 +129,11 @@ class WPVIP_Glossary {
 
 		// override default attributes with user specified attributes
 		$default_atts = array(
-			'excerpts'          => 'no',
-			'thumbnails'        => 'no',
-			'items_per_page'    => '1000',
-			'alphabet_headings' => 'yes',
-			'link'              => 'yes'
+				'excerpts'          => 'no',
+				'thumbnails'        => 'no',
+				'items_per_page'    => '1000',
+				'alphabet_headings' => 'yes',
+				'link'              => 'yes'
 		);
 
 		$atts = shortcode_atts( $default_atts, $user_atts, 'glossary' );
@@ -164,7 +166,7 @@ class WPVIP_Glossary {
 
 				if ( $atts['alphabet_headings'] === "yes" ) {
 					if ( $letter !== strtoupper( get_the_title()[0] ) ) {
-						$letter = strtoupper( get_the_title()[0] );
+						$letter  = strtoupper( get_the_title()[0] );
 						echo '</dl>' . PHP_EOL . '<h3 class="glossary__alphabet_headings">' . esc_html( $letter ) . '</h3>' . PHP_EOL . '<dl>';
 					}
 				}

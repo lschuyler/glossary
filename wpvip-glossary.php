@@ -114,36 +114,38 @@ class WPVIP_Glossary {
 	 *
 	 * Displays the glossary custom post type posts.
 	 *
-	 * @param array $user_atts Shortcode attributes. Default empty.
+	 * @param array $atts Shortcode attributes. Default empty.
+	 * @param string|null $content Shortcode content. Default null.
+	 * @param string $tag Shortcode tag (name). Default empty.
 	 *
-	 * @var array $default_atts Stores the default shortcode parameters, available to be overridden by specification in shortcode.
-	 * @var array $atts User defined attributes from the shortcode tag.
-	 * @var array $args Arguments for the WordPress query.
-	 * @var string $query WordPress Query.
+	 * @return string Shortcode output.
+	 *
 	 */
 
-	public function create_glossary_shortcode( $user_atts = [] ) {
+	public function create_glossary_shortcode( array $atts = [], string $content = null, string $tag = '' ): string {
+
+		$letter = '';
 
 		// change attribute keys to lowercase
-		$user_atts = array_change_key_case( (array) $user_atts, CASE_LOWER );
+		$atts = array_change_key_case( $atts, CASE_LOWER );
 
 		// override default attributes with user specified attributes
-		$default_atts = array(
+		$glossary_atts = shortcode_atts(
+			array(
 				'excerpts'          => 'no',
 				'thumbnails'        => 'no',
 				'items_per_page'    => '1000',
 				'alphabet_headings' => 'yes',
 				'link'              => 'yes'
+			), $atts, $tag
 		);
 
-		$atts = shortcode_atts( $default_atts, $user_atts, 'glossary' );
-
 		// enforce a max items_per_page to prevent performance issues
-		$atts['items_per_page'] = min( $atts['items_per_page'], 1000 );
+		$glossary_atts['items_per_page'] = min( $glossary_atts['items_per_page'], 1000 );
 
 		$args = array(
 			'post_type'      => 'glossary',
-			'posts_per_page' => $atts['items_per_page'],
+			'posts_per_page' => $glossary_atts['items_per_page'],
 			'post_status'    => 'publish',
 			'orderby'        => 'title',
 			'order'          => 'ASC',
@@ -153,50 +155,52 @@ class WPVIP_Glossary {
 
 		if ( $query->have_posts() ) {
 
-			if ( $atts['alphabet_headings'] === "yes" ) {
+			if ( $glossary_atts['alphabet_headings'] === "yes" ) {
 				$letter = '';
 			}
 
-			echo "<div class='glossary'>";
-			echo "<dl>";
+			$content .= "<div class='glossary'>";
+			$content .= "<dl>";
 
 			while ( $query->have_posts() ) {
 
 				$query->the_post();
 
-				if ( $atts['alphabet_headings'] === "yes" ) {
+				if ( $glossary_atts['alphabet_headings'] === "yes" ) {
 					if ( $letter !== strtoupper( get_the_title()[0] ) ) {
 						$letter  = strtoupper( get_the_title()[0] );
-						echo '</dl>' . PHP_EOL . '<h3 class="glossary__alphabet_headings">' . esc_html( $letter ) . '</h3>' . PHP_EOL . '<dl>';
+						$content .= '</dl>' . PHP_EOL . '<h3 class="glossary__alphabet_headings">' . esc_html( $letter ) . '</h3>' . PHP_EOL . '<dl>';
 					}
 				}
 
 				echo "<div class='glossary__item'>";
 
 
-				if ( $atts['link'] === 'yes' ) {
-					echo '<dt><a href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></dt>';
+				if ( $glossary_atts['link'] === 'yes' ) {
+					$content .= '<dt><a href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></dt>';
 				} else {
-					echo '<dt>' . esc_html( get_the_title() ) . '</dt>';
+					$content .= '<dt>' . esc_html( get_the_title() ) . '</dt>';
 				}
 
-				if ( $atts['excerpts'] === 'yes' ) {
-					echo "<dd>";
-					if ( $atts['thumbnails'] === 'yes' ) {
+				if ( $glossary_atts['excerpts'] === 'yes' ) {
+					$content .= "<dd>";
+					if ( $glossary_atts['thumbnails'] === 'yes' ) {
 						the_post_thumbnail( 'thumbnail', array( 'class' => 'glossary__img alignright' ) );
 					}
 					echo wp_kses_post( get_the_excerpt() ) . "</dd>";
 				}
 
-				echo "</div>" . PHP_EOL;
+				$content .= "</div>" . PHP_EOL;
 
 			}
 
 			wp_reset_postdata();
-			echo "</dl>";
-			echo "</div>";
+			$content .= "</dl>";
+			$content .= "</div>";
 
 		}
+
+		return $content;
 	}
 }
 

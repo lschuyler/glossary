@@ -114,7 +114,7 @@ class WPVIP_Glossary {
 	 *
 	 * Displays the glossary custom post type posts.
 	 *
-	 * @param mixed $atts Shortcode attributes. Default empty.
+	 * @param mixed $atts Shortcode attributes. Associated array if any attributes are used, empty string if not.
 	 * @param string|null $content Shortcode content. Default null.
 	 * @param string $tag Shortcode tag (name). Default empty.
 	 *

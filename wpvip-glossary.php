@@ -130,7 +130,7 @@ class WPVIP_Glossary {
 		$letter = '';
 
 		// if no attributes specified in shortcode by user, an empty string is passed for the $atts value. Switch it to an array.
-		if ( $atts == '' ) {
+		if ( $atts === '' ) {
 			$atts = [];
 		}
 

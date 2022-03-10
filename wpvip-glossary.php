@@ -164,7 +164,7 @@ class WPVIP_Glossary {
 		if ( $query->have_posts() ) {
 
 			if ( $glossary_atts['alphabet_headings'] === "yes" ) {
-				$letter = null;
+				$letter = '';
 			}
 
 			$content .= "<div class='glossary'>";

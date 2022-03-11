@@ -1,6 +1,6 @@
 <?php
 /**
- * WPVIP Glossary
+ * WP VIP Glossary
  *
  * @package     WPVIPGlossary
  * @author      Lisa Schuyler <lisa@automattic.com>
@@ -8,7 +8,7 @@
  * @license     GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:     WPVIP Glossary
+ * Plugin Name:     WP VIP Glossary
  * Plugin URI:
  * Description:     Adds a glossary custom post type with shortcode.
  * Version:         0.3.0

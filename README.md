@@ -1,4 +1,4 @@
-# WPVIP Glossary
+# WP VIP Glossary
 
 * Contributors: lschuyler, automattic
 * Tags: glossary

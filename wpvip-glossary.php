@@ -181,7 +181,7 @@ class WPVIP_Glossary {
 					}
 				}
 
-				echo "<div class='glossary__item'>";
+				$content .= "<div class='glossary__item'>";
 
 				if ( $glossary_atts['link'] === 'yes' ) {
 					$content .= '<dt><a href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></dt>';
@@ -194,7 +194,7 @@ class WPVIP_Glossary {
 					if ( $glossary_atts['thumbnails'] === 'yes' ) {
 						the_post_thumbnail( 'thumbnail', array( 'class' => 'glossary__img alignright' ) );
 					}
-					echo wp_kses_post( get_the_excerpt() ) . "</dd>";
+					$content .= wp_kses_post( get_the_excerpt() ) . "</dd>";
 				}
 
 				$content .= "</div>" . PHP_EOL;

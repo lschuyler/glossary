@@ -134,10 +134,10 @@ class WPVIP_Glossary {
 			$atts = array();
 		}
 
-		// change attribute keys to lowercase
+		// change attribute keys to lowercase.
 		$atts = array_change_key_case( $atts, CASE_LOWER );
 
-		// override default attributes with user specified attributes
+		// override default attributes with user specified attributes.
 		$glossary_atts = shortcode_atts(
 			array(
 				'excerpts'          => 'no',
@@ -148,7 +148,7 @@ class WPVIP_Glossary {
 			), $atts, $tag
 		);
 
-		// enforce a max items_per_page to prevent performance issues
+		// enforce a max items_per_page to prevent performance issues.
 		$glossary_atts['items_per_page'] = min( $glossary_atts['items_per_page'], 1000 );
 
 		$args = array(

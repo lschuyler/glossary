@@ -83,11 +83,11 @@ class WPVIP_Glossary {
 			'not_found_in_trash' => __( 'No Glossary Items found in Trash', 'wpvip-glossary' ),
 			'parent_item_colon'  => __( 'Parent Glossary Item:', 'wpvip-glossary' ),
 			'menu_name'          => __( 'Glossary', 'wpvip-glossary' ),
+			'description'        => __( 'Glossary', 'wpvip-glossary' ),
 		);
 
 		$args = array(
 			'labels'             => $labels,
-			'description'        => ( 'Glossary' ),
 			'menu_icon'          => 'dashicons-book-alt',
 			'public'             => true,
 			'show_ui'            => true,
@@ -101,7 +101,7 @@ class WPVIP_Glossary {
 				'excerpt',
 				'thumbnail',
 				'featured_image',
-				'revisions'
+				'revisions',
 			),
 		);
 
@@ -130,8 +130,8 @@ class WPVIP_Glossary {
 		$letter = '';
 
 		// if no attributes specified in shortcode by user, an empty string is passed for the $atts value. Switch it to an array.
-		if ( $atts === '' ) {
-			$atts = [];
+		if ( '' === $atts ) {
+			$atts = array();
 		}
 
 		// change attribute keys to lowercase
@@ -144,7 +144,7 @@ class WPVIP_Glossary {
 				'thumbnails'        => 'no',
 				'items_per_page'    => '1000',
 				'alphabet_headings' => 'yes',
-				'link'              => 'yes'
+				'link'              => 'yes',
 			), $atts, $tag
 		);
 
@@ -163,19 +163,19 @@ class WPVIP_Glossary {
 
 		if ( $query->have_posts() ) {
 
-			if ( $glossary_atts['alphabet_headings'] === "yes" ) {
+			if ( 'yes' === $glossary_atts['alphabet_headings'] ) {
 				$letter = '';
 			}
 
 			$content .= "<div class='glossary'>";
-			$content .= "<dl>";
+			$content .= '<dl>';
 
 			while ( $query->have_posts() ) {
 
 				$query->the_post();
 
-				if ( $glossary_atts['alphabet_headings'] === "yes" ) {
-					if ( $letter !== strtoupper( get_the_title()[0] ) ) {
+				if ( 'yes' === $glossary_atts['alphabet_headings'] ) {
+					if ( strtoupper( get_the_title()[0] ) !== $letter ) {
 						$letter  = strtoupper( get_the_title()[0] );
 						$content .= '</dl>' . PHP_EOL . '<h3 class="glossary__alphabet_headings">' . esc_html( $letter ) . '</h3>' . PHP_EOL . '<dl>';
 					}
@@ -183,27 +183,27 @@ class WPVIP_Glossary {
 
 				$content .= "<div class='glossary__item'>";
 
-				if ( $glossary_atts['link'] === 'yes' ) {
+				if ( 'yes' === $glossary_atts['link'] ) {
 					$content .= '<dt><a href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></dt>';
 				} else {
 					$content .= '<dt>' . esc_html( get_the_title() ) . '</dt>';
 				}
 
-				if ( $glossary_atts['excerpts'] === 'yes' ) {
-					$content .= "<dd>";
-					if ( $glossary_atts['thumbnails'] === 'yes' ) {
+				if ( 'yes' === $glossary_atts['excerpts'] ) {
+					$content .= '<dd>';
+					if ( 'yes' === $glossary_atts['thumbnails'] ) {
 						the_post_thumbnail( 'thumbnail', array( 'class' => 'glossary__img alignright' ) );
 					}
-					$content .= wp_kses_post( get_the_excerpt() ) . "</dd>";
+					$content .= wp_kses_post( get_the_excerpt() ) . '</dd>';
 				}
 
-				$content .= "</div>" . PHP_EOL;
+				$content .= '</div>' . PHP_EOL;
 
 			}
 
 			wp_reset_postdata();
-			$content .= "</dl>";
-			$content .= "</div>";
+			$content .= '</dl>';
+			$content .= '</div>';
 
 		}
 
